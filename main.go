@@ -160,6 +160,9 @@ func main() {
 	}
 
 	http.HandleFunc("/feed", feedHandler)
+	http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	})
 
 	log.Printf("Serving quote of the day on :%s/feed", port)
 	if err := http.ListenAndServe(":"+port, nil); err != nil {
